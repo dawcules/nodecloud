@@ -1,5 +1,28 @@
 'use strict';
+require('dotenv').config();
+const mysql = require('mysql2');
 
+// create the connection to database
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+});
+
+app.get('/', (req,res) => {
+
+// simple query
+  connection.query(
+      'SELECT * FROM `test`',
+      function(err, results, fields) {
+        console.log(results); // results contains rows returned by server
+        console.log(fields); // fields contains extra meta data about results, if available
+        res.send(results);
+      }
+  );
+});
+/*
 console.log('hello world');
 
 const express = require('express');
@@ -21,4 +44,4 @@ app.get('/test', (req, res) => {
 });
 
 
-app.listen(3000);
+app.listen(3000);*/
