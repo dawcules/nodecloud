@@ -89,5 +89,5 @@ app.get('/test', (req, res) => {
 });
 
 
-app.listen(8000); //normal http traffic
-https.createServer(options, app).listen(3000); //https traffic
+app.listen(3000); //normal http traffic
+https.createServer(options, app).listen(8000); //https traffic
