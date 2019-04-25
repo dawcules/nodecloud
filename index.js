@@ -17,7 +17,7 @@ passport.use(new LocalStrategy(
       if (username !=process.env.USR && password != process.env.PWD) {
         return done(null,false);
       }
-      return done(null, user);
+      return done(null, username);
     }
 ));
 
@@ -60,6 +60,12 @@ app.post('/', bodyParser.urlencoded({extended:true}), (req, res) => {
   console.log(req.body);
   res.send('POST: Hello ' + req.body.name);
 });
+
+pp.post('/login',
+    passport.authenticate('local', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    });
 
 app.get('/test', (req, res) => {
   console.log(req.query);
