@@ -1,5 +1,6 @@
 'use strict';
 require('dotenv').config();
+const app = express();
 const mysql = require('mysql2');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -10,7 +11,6 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
-var app = express();
 
 app.use(require('serve-static')(__dirname + '/../../public'));
 app.use(require('cookie-parser')());
@@ -23,7 +23,6 @@ app.use(passport.session());
 const fs      = require('fs');
 const https   = require('https');
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const sslkey  = fs.readFileSync('/etc/pki/tls/private/ca.key');
 const sslcert = fs.readFileSync('/etc/pki/tls/certs/ca.crt');
