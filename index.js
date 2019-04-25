@@ -2,7 +2,7 @@
 require('dotenv').config();
 const mysql = require('mysql2');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').LocalStrategy;
+const LocalStrategy = require('passport-local').Strategy;
 // create the connection to database
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
