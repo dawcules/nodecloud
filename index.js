@@ -12,6 +12,16 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
+const bcrypt = require('bcrypt');
+const saltRounds =12;
+const myPlaintextPassword = 'test123';
+
+bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
+  // Store hash in youe password DB.
+  console.log(hash)
+}
+
+/*
 
 app.use(require('serve-static')(__dirname + '/public'));
 app.use(require('cookie-parser')());
@@ -55,7 +65,7 @@ console.log('hello world');
 
 
 
-/*app.get('/', (req,res) => {
+/!*app.get('/', (req,res) => {
 
 // simple query
   connection.query(
@@ -66,7 +76,7 @@ console.log('hello world');
         res.send(results);
       }
   );
-});*/
+});*!/
 
 app.get('/', (req,res) => {
   if (req.secure) res.send('https :)');
@@ -92,3 +102,4 @@ app.get('/test', (req, res) => {
 
 app.listen(3000); //normal http traffic
 https.createServer(options, app).listen(8000); //https traffic
+*/
