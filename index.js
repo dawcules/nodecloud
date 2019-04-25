@@ -8,6 +8,16 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
+
+passport.use(new LocalStrategy(
+    (username, password, done) => {
+      if (username !='tester' && password != 'test123') {
+        return done(null,false);
+      }
+      return done(null, user);
+    }
+));
+
 const fs      = require('fs');
 const https   = require('https');
 const express = require('express');
