@@ -61,7 +61,7 @@ app.post('/', bodyParser.urlencoded({extended:true}), (req, res) => {
   res.send('POST: Hello ' + req.body.name);
 });
 
-pp.post('/login',
+app.post('/login',
     passport.authenticate('local', { failureRedirect: '/login' }),
     function(req, res) {
       res.redirect('/');
