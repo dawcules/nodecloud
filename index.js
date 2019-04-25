@@ -19,7 +19,7 @@ const myPlaintextPassword = 'test123';
 bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
   // Store hash in youe password DB.
   console.log(hash)
-}
+});
 
 /*
 
