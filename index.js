@@ -11,7 +11,8 @@ const connection = mysql.createConnection({
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
-      if (username !='tester' && password != 'test123') {
+      // Normally, select * from users where username=?
+      if (username !=process.env.USR && password != process.env.PWD) {
         return done(null,false);
       }
       return done(null, user);
