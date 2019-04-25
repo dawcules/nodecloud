@@ -10,16 +10,15 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
+var app = express();
 
-passport.use(new LocalStrategy(
-    (username, password, done) => {
-      // Normally, select * from users where username=?
-      if (username !=process.env.USR && password != process.env.PWD) {
-        return done(null,false);
-      }
-      return done(null, username);
-    }
-));
+app.use(require('serve-static')(__dirname + '/../../public'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 const fs      = require('fs');
 const https   = require('https');
@@ -32,6 +31,24 @@ const options = {
   key: sslkey,
   cert: sslcert
 };
+
+passport.use(new LocalStrategy(
+    (username, password, done) => {
+      // Normally, select * from users where username=?
+      if (username !=process.env.USR && password != process.env.PWD) {
+        return done(null,false);
+      }
+      return done(null, {name: username});
+    }
+));
+passport.serializeUser((user, done) => {
+  done (null, user)
+});
+
+passport.deserializeUser((id, done) => {
+  return user;
+  });
+
 
 console.log('hello world');
 
