@@ -42,7 +42,7 @@ const options = {
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
-      console.log('login?' ${username});
+      console.log(`login? ${username}`);
       // Normally, select * from users where username=?
       if (username !=process.env.USR && bcrypt.compareSync(password, process.env.PWD)) {
         return done(null,false);
